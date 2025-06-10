@@ -14,11 +14,11 @@ async function scrapeGovUk() {
     })).filter(item => item.title && item.url.startsWith('https://www.gov.uk'));
   });
 
-  const dataPath = path.join(__dirname, 'data', 'visas.json');
-  fs.mkdirSync(path.dirname(dataPath), { recursive: true });
-  fs.writeFileSync(dataPath, JSON.stringify(visas, null, 2));
+  const filePath = path.join(__dirname, 'data', 'visas.json');
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(visas, null, 2));
 
-  console.log(`✅ Scraped ${visas.length} visa entries.`);
+  console.log(`✅ Saved ${visas.length} visas to data/visas.json`);
   await browser.close();
 }
 

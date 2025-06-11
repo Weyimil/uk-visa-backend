@@ -26,11 +26,11 @@ jobs:
       - name: Run scraper
         run: node scraper.js
 
-      - name: Commit and push updated data
+           - name: Commit and push updated data
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add data/visas.json
           git commit -m "🤖 Daily visa data update" || echo "No changes to commit"
-          git push --force-with-lease
+          git push --force-with-lease origin master
 

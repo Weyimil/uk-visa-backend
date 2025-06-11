@@ -1,33 +1,33 @@
 name: Daily Visa Scraper
 
 on:
-  schedule:
-    - cron: '0 7 * * *'  # Daily at 7 AM UTC
-  workflow_dispatch:
+schedule:
+- cron: '0 7 * * *'  # Daily at 7 AM UTC
+workflow_dispatch:
 
 jobs:
-  scrape-and-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+scrape-and-commit:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout repo
+uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+- name: Set up Node.js
+uses: actions/setup-node@v3
+with:
+node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+- name: Install dependencies
+run: npm install
 
-      - name: Run scraper
-        run: node scraper.js
+- name: Run scraper
+run: node scraper.js
 
-      - name: Commit and push updated data
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Weyimil/uk-visa-backend.git
-          git add data/visas.json
-          git commit -m "🤖 Daily visa data update" || echo "No changes to commit"
-          git push origin HEAD:master
+- name: Commit and push updated data
+run: |
+git config user.name "GitHub Actions Bot"
+git config user.email "actions@github.com"
+git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Weyimil/uk-visa-backend.git
+git add data/visas.json
+git commit -m "🤖 Daily visa data update" || echo "No changes to commit"
+git push origin HEAD:master
